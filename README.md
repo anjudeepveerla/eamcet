@@ -4,7 +4,6 @@ This is an EAMCET College Predictor designed using Python Django Framework
 ## Process:
 
 ### 1.Click on the URL specified and enter the details and click on "Submit" 
-url : https://tseamcet-collegepredictor.herokuapp.com/
 
 <a href= "http://drive.google.com/uc?export=view&id=1_XLlor6wvhtbIZpGsfz_a9hz6l6nji4I"><img src="http://drive.google.com/uc?export=view&id=1_XLlor6wvhtbIZpGsfz_a9hz6l6nji4I" alt="ECP" width= auto height = auto ></a>
 ### 2. After the submission, a page like below will be displayed.
