@@ -1,6 +1,9 @@
 import pandas as pd
+import os
+from django.conf import settings
 
-df=pd.read_csv('tseamcet.csv')
+csv_path = os.path.join(settings.BASE_DIR, 'tseamcet.csv')
+df = pd.read_csv(csv_path)
 def predict(rank,gender,caste,branch):
 	if branch=='None':
 		val=df[df['rank']>=rank]
@@ -26,12 +29,6 @@ def list_of_colleges():
 def branch_list(college):
 	college = df[df['college']==college]
 	branches = college.branch.unique().tolist()
-	return branches
-
-def college_branch_data(college,branch):
-	college = df[df['college']==college]
-	branches = college[college['branch']==branch]
-	
 	return branches
 
 def fees(college):

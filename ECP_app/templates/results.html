@@ -1,46 +1,109 @@
 {% extends 'homepage.html' %}
 {% load static %}
 {% block content %}
- <div class="container-fluid" style="margin-top:30px">
-     <div class="row">
-         <div class="column">
-             <div class="card shadow" style="border-radius: 15px;margin: 50px;">
-
-                <div class="card-body" style="background: white;margin: 0px;border-radius: 15px;">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-
-                                  <th scope="col">Rank</th>
-                                  <th scope="col">Gender</th>
-                                  <th scope="col">College Name</th>
-                                  <th scope="col">Branch</th>
-                                  <th scope="col">Caste</th>
-
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {% for i in values %}
-                                <tr>
-
-                                  <td>{{ i.1 }}</td>
-                                  <td style="text-align: center;">{{ i.2 }}</td>
-                                   <td><a href="{% url 'college_branch' i.9 %}"  onMouseOver="this.style.color='blue'" onMouseOut="this.style.color='black'" style="color:#000;text-decoration:none;">{{ i.9 }}</a></td>
-                                   <td>{{ i.7 }}</td>
-                                    <td>{{ i.3 }}</td>
-                                </tr>
-                                {% endfor %}
-
-                              </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-     </div>
+<div class="container" style="margin-top: 30px">
+    <h1>Predicted Colleges</h1>
+    <div class="table-container">
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Gender</th>
+                    <th>College Name</th>
+                    <th>Branch</th>
+                    <th>Caste</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in values %}
+                <tr class="result-row">
+                    <td>{{ i.1 }}</td>
+                    <td>{{ i.2 }}</td>
+                    <td><a href="{% url 'college_branch' i.9 %}" class="college-link">{{ i.9 }}</a></td>
+                    <td>{{ i.7 }}</td>
+                    <td>{{ i.3 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'home' %}" class="back-link">← Back to Predictor</a>
+    </div>
 </div>
 
-
+<style>
+    .table-container {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        overflow-x: auto;
+    }
+    .results-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+        font-size: 15px;
+    }
+    .results-table th {
+        background: #f8f9fa;
+        color: #333;
+        font-weight: 600;
+        padding: 15px;
+        text-align: left;
+        border-bottom: 2px solid #eaeaea;
+        letter-spacing: 0.3px;
+    }
+    .results-table td {
+        padding: 15px;
+        border-bottom: 1px solid #eaeaea;
+        color: #555;
+    }
+    .result-row {
+        transition: all 0.3s ease;
+    }
+    .result-row:hover {
+        background-color: #f8f9fa;
+        transform: translateX(5px);
+    }
+    .college-link {
+        color: #2196F3;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    .college-link:hover {
+        color: #1976D2;
+    }
+    .back-link {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #2196F3;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        letter-spacing: 0.3px;
+        margin-top: 20px;
+    }
+    .back-link:hover {
+        background-color: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+    }
+    @media (max-width: 600px) {
+        .table-container {
+            padding: 15px;
+            margin: 0 -15px;
+            border-radius: 0;
+        }
+        .results-table th,
+        .results-table td {
+            padding: 12px;
+            font-size: 14px;
+        }
+    }
+</style>
 {% endblock content %}

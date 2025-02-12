@@ -1,52 +1,198 @@
-{% extends 'homepage.html' %}
-{% load static %}
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{Name}} - College Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            color: #333;
+        }
+        .nav-bar {
+            background-color: #ffffff;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .nav-link {
+            padding: 10px 25px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+        .nav-link:hover {
+            background-color: #f8f9fa;
+            color: #2196F3;
+        }
+        .nav-link.active {
+            background-color: #2196F3;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+            letter-spacing: 0.5px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .section:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            transform: translateY(-2px);
+        }
+        .section-title {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .branch-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .branch-item {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            color: #555;
+        }
+        .branch-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        }
+        .fee-info {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .fee-amount {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #2196F3;
+            font-weight: 600;
+        }
+        .navigation {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .back-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+        .back-link:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eaeaea;
+        }
+        .footer-link {
+            color: #2196F3 !important;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+        .footer-link:hover {
+            color: #1976D2 !important;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+                border-radius: 12px;
+            }
+            .section {
+                padding: 15px;
+            }
+            .branch-item {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <a href="{% url 'colleges' %}" class="nav-link">Colleges</a>
+        </div>
+    </nav>
 
-<div class="container-fluid" style="margin-top:30px">
-     <div class="row">
-         <div class="column">
-             <div class="card shadow" style="border-radius: 15px;margin: 50px;">
-                 <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
-                    <p class="m-0 fw-bold" style="color: #ffffff;">{{ Name }}</p>
-                </div>
+    <div class="container">
+        <h1>{{Name}}</h1>
+        
+        <div class="section">
+            <h2 class="section-title">Available Branches</h2>
+            <ul class="branch-list">
+                {% for branch in branches %}
+                <li class="branch-item">{{ branch }}</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-                <div class="card-body" style="background: white;margin: 0px;border-radius: 15px;">
-                    <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr>
-
-
-                              <th scope="col">Branch</th>
-                              <th scope="col">Fee</th>
-
-
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {% for i in branches %}
-                            <tr>
-
-
-                               <td><a href="{% url 'cbs' Name i %}" onMouseOver="this.style.color='blue'" onMouseOut="this.style.color='black'" style="color:#000;text-decoration:none;">{{ i }}</a></td>
-                               <td>{{ fee }}</td>
-
-                            </tr>
-                            {% endfor %}
-
-                          </tbody>
-                        </table>
-                    </div>
-                </div>
+        <div class="section">
+            <h2 class="section-title">College Fee</h2>
+            <div class="fee-info">
+                <div class="fee-amount">₹{{ fee }}</div>
             </div>
         </div>
 
-     </div>
-</div>
+        <div class="navigation">
+            <a href="{% url 'colleges' %}" class="back-link">← Back to Colleges List</a>
+        </div>
 
-
-
-
-
-
-{% endblock content %}
+        <footer>
+            <p>Developed By: <a href="https://www.instagram.com/lumi.ai_/" class="footer-link" target="_blank">Team Lumi AI</a></p>
+        </footer>
+    </div>
+</body>
+</html>
