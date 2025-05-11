@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>EAMCET College Predictor</title>
+{% extends 'base.html' %}
+
+{% block title %}EAMCET College Predictor{% endblock %}
+
+{% block content %}
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -92,53 +93,6 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
         }
-        .nav-bar {
-            background-color: #ffffff;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-        }
-        .nav-container {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .nav-link {
-            padding: 10px 25px;
-            color: #333;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            letter-spacing: 0.3px;
-        }
-        .nav-link:hover {
-            background-color: #f8f9fa;
-            color: #2196F3;
-        }
-        .nav-link.active {
-            background-color: #2196F3;
-            color: #ffffff;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #eaeaea;
-        }
-        .footer-link {
-            color: #2196F3 !important;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 600;
-        }
-        .footer-link:hover {
-            color: #1976D2 !important;
-        }
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
@@ -156,14 +110,6 @@
             }
         }
     </style>
-</head>
-<body>
-    <nav class="nav-bar">
-        <div class="nav-container">
-            <a href="{% url 'home' %}" class="nav-link active">Home</a>
-            <a href="{% url 'colleges' %}" class="nav-link">Colleges</a>
-        </div>
-    </nav>
 
     <div class="container">
         <h1>EAMCET College Predictor</h1>
@@ -200,65 +146,19 @@
             </div>
 
             <div class="form-group">
-                <label for="branch">BRANCH</label>
-                <select id="branch" name="branch">
-                    <option value="None">None</option>
-                    <option value="AERONAUTICAL ENGINEERING">AERONAUTICAL ENGINEERING</option>
-                    <option value="AGRICULTURAL ENGINEERING">AGRICULTURAL ENGINEERING</option>
-                    <option value="ARTIFICIAL INTELLIGENCE">ARTIFICIAL INTELLIGENCE</option>
-                    <option value="ARTIFICIAL INTELLIGENCE AND DATA SCIENCE">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
-                    <option value="AUTOMOBILE ENGINEERING">AUTOMOBILE ENGINEERING</option>
-                    <option value="B. PHARMACY (M.P.C. STREAM)">B. PHARMACY (M.P.C. STREAM)</option>
-                    <option value="BIO-MEDICAL ENGINEERING">BIO-MEDICAL ENGINEERING</option>
-                    <option value="BIO-TECHNOLOGY">BIO-TECHNOLOGY</option>
-                    <option value="BTECH MECHANICAL WITH MTECH MANUFACTURING  SYSTEMS">BTECH MECHANICAL WITH MTECH MANUFACTURING  SYSTEMS</option>
-                    <option value="BTECH MECHANICAL WITH MTECH THERMAL ENGG">BTECH MECHANICAL WITH MTECH THERMAL ENGG</option>
-                    <option value="CHEMICAL ENGINEERING">CHEMICAL ENGINEERING</option>
-                    <option value="CIVIL ENGINEERING">CIVIL ENGINEERING</option>
-                    <option value="COMPUTER ENGINEERING">COMPUTER ENGINEERING</option>
-                    <option value="COMPUTER ENGINEERING(SOFTWARE ENGINEERING)">COMPUTER ENGINEERING(SOFTWARE ENGINEERING)</option>
-                    <option value="COMPUTER SCIENCE & ENGINEERING (NETWORKS)">COMPUTER SCIENCE & ENGINEERING (NETWORKS)</option>
-                    <option value="COMPUTER SCIENCE AND BUSINESS SYSTEM">COMPUTER SCIENCE AND BUSINESS SYSTEM</option>
-                    <option value="COMPUTER SCIENCE AND ENGINEERING">COMPUTER SCIENCE AND ENGINEERING</option>
-                    <option value="COMPUTER SCIENCE AND ENGINEERING (ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING)">COMPUTER SCIENCE AND ENGINEERING (ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING)</option>
-                    <option value="COMPUTER SCIENCE AND ENGINEERING (CYBER SECURITY)">COMPUTER SCIENCE AND ENGINEERING (CYBER SECURITY)</option>
-                    <option value="COMPUTER SCIENCE AND ENGINEERING (DATA SCIENCE)">COMPUTER SCIENCE AND ENGINEERING (DATA SCIENCE)</option>
-                    <option value="COMPUTER SCIENCE AND ENGINEERING (IOT)">COMPUTER SCIENCE AND ENGINEERING (IOT)</option>
-                    <option value="COMPUTER SCIENCE AND INFORMATION TECHNOLOGY">COMPUTER SCIENCE AND INFORMATION TECHNOLOGY</option>
-                    <option value="COMPUTER SCIENCE AND TECHNOLOGY">COMPUTER SCIENCE AND TECHNOLOGY</option>
-                    <option value="CSE (IoT AND CYBER SECURITY INCLUDING BLOCK CHAIN TECHNOLOGY)">CSE (IoT AND CYBER SECURITY INCLUDING BLOCK CHAIN TECHNOLOGY)</option>
-                    <option value="DAIRYING">DAIRYING</option>
-                    <option value="DIGITAL TECHNIQUES FOR DESIGN AND PLANNING">DIGITAL TECHNIQUES FOR DESIGN AND PLANNING</option>
-                    <option value="ELECTRICAL AND ELECTRONICS ENGINEERING">ELECTRICAL AND ELECTRONICS ENGINEERING</option>
-                    <option value="ELECTRONICS AND COMMUNICATION ENGINEERING">ELECTRONICS AND COMMUNICATION ENGINEERING</option>
-                    <option value="ELECTRONICS AND COMPUTER ENGINEERING">ELECTRONICS AND COMPUTER ENGINEERING</option>
-                    <option value="ELECTRONICS AND INSTRUMENTATION ENGINEERING">ELECTRONICS AND INSTRUMENTATION ENGINEERING</option>
-                    <option value="ELECTRONICS AND TELEMATICS">ELECTRONICS AND TELEMATICS</option>
-                    <option value="ELECTRONICS COMMUNICATION AND INSTRUMENTATION ENGINEERING">ELECTRONICS COMMUNICATION AND INSTRUMENTATION ENGINEERING</option>
-                    <option value="FACILITIES AND SERVICES PLANNING">FACILITIES AND SERVICES PLANNING</option>
-                    <option value="FOOD PROCESSING TECHNOLOGY">FOOD PROCESSING TECHNOLOGY</option>
-                    <option value="FOOD SCIENCE">FOOD SCIENCE</option>
-                    <option value="INDUSTRIAL PRODUCTION ENGINEERING">INDUSTRIAL PRODUCTION ENGINEERING</option>
-                    <option value="INFORMATION TECHNOLOGY">INFORMATION TECHNOLOGY</option>
-                    <option value="INFORMATION TECHNOLOGY AND ENGINEERING">INFORMATION TECHNOLOGY AND ENGINEERING</option>
-                    <option value="MECHANICAL (MECHTRONICS) ENGINEERING">MECHANICAL (MECHTRONICS) ENGINEERING</option>
-                    <option value="MECHANICAL ENGINEERING">MECHANICAL ENGINEERING</option>
-                    <option value="METALLURGICAL ENGINEERING">METALLURGICAL ENGINEERING</option>
-                    <option value="METALLURGY AND MATERIAL ENGINEERING">METALLURGY AND MATERIAL ENGINEERING</option>
-                    <option value="MINING ENGINEERING">MINING ENGINEERING</option>
-                    <option value="PHARM - D (M.P.C. STREAM)">PHARM - D (M.P.C. STREAM)</option>
-                    <option value="PHARMACEUTICAL ENGINEERING">PHARMACEUTICAL ENGINEERING</option>
-                    <option value="PLANNING">PLANNING</option>
-                    <option value="TEXTILE TECHNOLOGY">TEXTILE TECHNOLOGY</option>
+            <label for="branch">BRANCH *</label>
+            <select id="branch" name="branch" required>
+                <option disabled selected value>-- Select Branch --</option>
+                <option value="CSE">Computer Science Engineering</option>
+                <option value="ECE">Electronics & Communication Engineering</option>
+                <option value="EEE">Electrical & Electronics Engineering</option>
+                <option value="ME">Mechanical Engineering</option>
+                <option value="CE">Civil Engineering</option>
+                <option value="IT">Information Technology</option>
                 </select>
             </div>
 
-            <button type="submit" class="submit-btn">PREDICT COLLEGES</button>
+        <button type="submit" class="submit-btn">Predict Colleges</button>
         </form>
-
-        <footer>
-            <p>Developed By: <a href="https://www.instagram.com/lumi.ai_/" class="footer-link" target="_blank">Team Lumi AI</a></p>
-        </footer>
     </div>
-</body>
-</html>
+{% endblock %}

@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Colleges List - EAMCET College Predictor</title>
+{% extends 'base.html' %}
+
+{% block title %}Colleges List{% endblock %}
+
+{% block content %}
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -10,38 +11,6 @@
             padding: 0;
             line-height: 1.8;
             color: #333;
-        }
-        .nav-bar {
-            background-color: #ffffff;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-        }
-        .nav-container {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .nav-link {
-            padding: 10px 25px;
-            color: #333;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            letter-spacing: 0.3px;
-        }
-        .nav-link:hover {
-            background-color: #f8f9fa;
-            color: #2196F3;
-        }
-        .nav-link.active {
-            background-color: #2196F3;
-            color: #ffffff;
         }
         .container {
             max-width: 800px;
@@ -61,34 +30,63 @@
             border-bottom: 1px solid #eaeaea;
             letter-spacing: 0.5px;
         }
-        .colleges-list {
-            list-style-type: none;
+    .college-list {
+        list-style: none;
             padding: 0;
             margin: 0;
         }
         .college-item {
-            padding: 20px;
-            margin: 10px 0;
-            background-color: #ffffff;
+        background: #ffffff;
             border: 1px solid #eaeaea;
             border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
             transition: all 0.3s ease;
-        }
-        .college-item a {
-            color: #333;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
             text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            letter-spacing: 0.3px;
+        color: inherit;
         }
         .college-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border-color: #2196F3;
         }
-        .college-item:hover a {
+    .college-name {
+        color: #333;
+        font-size: 1.2em;
+        margin: 0;
+        font-weight: 600;
+    }
+    .arrow-icon {
             color: #2196F3;
+        font-size: 1.2em;
+        transition: transform 0.3s ease;
+    }
+    .college-item:hover .arrow-icon {
+        transform: translateX(5px);
+    }
+    .search-container {
+        margin-bottom: 30px;
+    }
+    .search-input {
+        width: 100%;
+        padding: 12px 20px;
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    .search-input:focus {
+        outline: none;
+        border-color: #2196F3;
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    }
+    .no-colleges {
+        text-align: center;
+        padding: 30px;
+        color: #666;
         }
         .back-link {
             display: inline-block;
@@ -99,7 +97,6 @@
             border-radius: 10px;
             font-weight: 600;
             transition: all 0.3s ease;
-            letter-spacing: 0.3px;
             margin-top: 20px;
         }
         .back-link:hover {
@@ -126,90 +123,41 @@
             .container {
                 padding: 20px;
                 margin: 20px;
-                border-radius: 12px;
-            }
-            .college-item {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 24px;
-            }
         }
-        .search-container {
-            margin-bottom: 30px;
-            position: relative;
-        }
-        .search-input {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 16px;
-            border: 1px solid #eaeaea;
-            border-radius: 12px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-            transition: all 0.3s ease;
-            color: #333;
-            font-family: inherit;
-        }
-        .search-input:focus {
-            outline: none;
-            border-color: #2196F3;
-            box-shadow: 0 2px 12px rgba(33, 150, 243, 0.1);
-        }
-        .search-input::placeholder {
-            color: #999;
-        }
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            pointer-events: none;
-        }
-        .no-results {
-            text-align: center;
-            padding: 30px;
-            color: #666;
-            font-size: 16px;
-            display: none;
         }
     </style>
-</head>
-<body>
-    <nav class="nav-bar">
-        <div class="nav-container">
-            <a href="{% url 'home' %}" class="nav-link">Home</a>
-            <a href="{% url 'colleges' %}" class="nav-link active">Colleges</a>
-        </div>
-    </nav>
+
+<!-- Add Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <div class="container">
         <h1>Available Colleges</h1>
         
         <div class="search-container">
             <input type="text" id="searchCollege" class="search-input" placeholder="Search for colleges..." onkeyup="searchColleges()">
-            <span class="search-icon">🔍</span>
         </div>
         
-        <ul class="colleges-list">
+    {% if colleges %}
+    <ul class="college-list">
             {% for college in colleges %}
-            <li class="college-item">
-                <a href="{% url 'college_branch' college %}">{{ college }}</a>
-            </li>
+        <a href="{% url 'college_branch' college %}" class="college-item">
+            <h2 class="college-name">{{ college }}</h2>
+            <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
             {% endfor %}
         </ul>
-
-        <div class="no-results">
-            No colleges found matching your search.
+    {% else %}
+    <div class="no-colleges">
+        <p>No colleges found matching your criteria.</p>
         </div>
+    {% endif %}
 
         <div style="text-align: center;">
             <a href="{% url 'home' %}" class="back-link">← Back to Predictor</a>
         </div>
 
         <footer>
-            <p>Developed By: <a href="https://www.instagram.com/lumi.ai_/" class="footer-link" target="_blank">Team Lumi AI</a></p>
+        <p>Developed By: <a href="https://www.instagram.com/lumi.ai_/" class="footer-link" target="_blank" rel="noopener">Team Lumi AI</a></p>
         </footer>
     </div>
 
@@ -217,24 +165,23 @@
         function searchColleges() {
             const searchInput = document.getElementById('searchCollege');
             const filter = searchInput.value.toUpperCase();
-            const collegesList = document.querySelector('.colleges-list');
-            const colleges = collegesList.getElementsByTagName('li');
-            const noResults = document.querySelector('.no-results');
+        const collegeItems = document.querySelectorAll('.college-item');
             let resultsFound = false;
 
-            for (let i = 0; i < colleges.length; i++) {
-                const college = colleges[i].getElementsByTagName('a')[0];
-                const txtValue = college.textContent || college.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    colleges[i].style.display = '';
+        collegeItems.forEach(item => {
+            const collegeName = item.querySelector('.college-name').textContent;
+            if (collegeName.toUpperCase().indexOf(filter) > -1) {
+                item.style.display = 'flex';
                     resultsFound = true;
                 } else {
-                    colleges[i].style.display = 'none';
-                }
+                item.style.display = 'none';
             }
+        });
 
-            noResults.style.display = resultsFound ? 'none' : 'block';
+        const noColleges = document.querySelector('.no-colleges');
+        if (noColleges) {
+            noColleges.style.display = resultsFound ? 'none' : 'block';
+        }
         }
     </script>
-</body>
-</html>
+{% endblock %}
